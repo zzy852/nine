@@ -12,17 +12,17 @@
         <div class="container">
             <table class="nine">
                 <tbody>
-                    <tr class="row">
+                    <tr>
                         <td class="item" data-index="1">萌妹子</td>
                         <td class="item" data-index="2">如花</td>
                         <td class="item" data-index="3">女汉子</td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td class="item active" data-index="8">女神</td>
                         <td class="center"><a href="#" class="btn-start">开始</a></td>
                         <td class="item" data-index="4">苍老师</td>
                     </tr>
-                    <tr class="row">
+                    <tr>
                         <td class="item" data-index="7">凤姐</td>
                         <td class="item" data-index="6">郭美美</td>
                         <td class="item" data-index="5">人妖</td>
@@ -38,30 +38,31 @@
                 return;
             }
             gRunning = true;
-            next(parseInt(Math.random() * 100 / 2));
+            next(parseInt(Math.random() * 50));
         });
+
         function next(time) {
             var active = $(".item.active"),
                 index = active.data("index"),
-                num = $(".item").length,
-                nextTime = time + 5 * time / 50;
-            nextIndex = 1,
+                max = $(".item").length,
+                nextTime = time + 5 * time / 50,
+                nextIndex = 1,
                 nextItem = null;
-            if (index == num) {
+            if (index == max) {
                 nextIndex = 1;
             } else {
                 nextIndex = index + 1;
             }
             active.removeClass("active");
             nextItem = $(".item[data-index=" + nextIndex + "]").addClass('active');
-            if (time < 500) {
-                window.setTimeout(function() {
-                    next(nextTime);
-                }, nextTime);
-            } else {
+            if (time > 800) {
                 gRunning = false;
                 var info = nextItem.text();
                 alert("恭喜你获得" + info);
+            } else {
+                window.setTimeout(function() {
+                    next(nextTime);
+                }, nextTime);
             }
         }
         </script>
